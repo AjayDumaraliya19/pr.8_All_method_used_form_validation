@@ -10,26 +10,30 @@
 
 <body>
     <h1>LOGIN FORM</h1>
-    <form name="myform" action="#" onsubmit="return formValidaton()" method="post">
+    <form name="myform" action="#" onsubmit="return formValidation()" method="post">
         <div class="formdesign" id="firstname">
-            First Name : <input type="text" name="fname" id="fnam"><span class="formerror" id="firstNameError"></span>
+            First Name : <input type="text" name="fname" id="fnam" required><span class="formerror"
+                id="firstNameError"></span>
         </div>
         <div class="formdesign" id="lastname">
-            Last Name : <input type="text" name="lname" id="lnam"><span class="formerror" id="lastNameError"></span>
+            Last Name : <input type="text" name="lname" id="lnam" required><span class="formerror"
+                id="lastNameError"></span>
         </div>
         <div class="formdesign" id="phone">
-            Mobile : <input type="tel" name="fphone" id="mobile"><span class="formerror" id="phoneError"></span>
+            Mobile : <input type="tel" name="fphone" id="mobile" required><span class="formerror"
+                id="phoneError"></span>
         </div>
         <div class="formdesign" id="dob">
-            date of Birth : <input type="date" name="dob" id="dobField"><span class="formerror" id="dobError"></span>
+            date of Birth : <input type="date" name="dob" id="dobField" required><span class="formerror" id="dobError"
+                required></span>
         </div>
         <div class="formdesign" id="email">
-            Email : <input type="email" name="femail" id="mail"><span class="formerror" id="emailError"></span>
+            Email : <input type="email" name="femail" id="mail" required><span class="formerror" id="emailError"></span>
         </div>
         <div class="formdesign" id="gender">
             Gender :
-            <input type="radio" name="gender" id="gend" value="male">Male <span class="formerror"></span>
-            <input type="radio" name="gender" id="gend" value="female">Female <span class="formerror"></span>
+            <input type="radio" name="gender" id="gend" value="male" required>Male <span class="formerror"></span>
+            <input type="radio" name="gender" id="gend" value="female" required>Female <span class="formerror"></span>
             <span class="formerror" id="genderError"></span>
         </div>
 
@@ -61,7 +65,7 @@
     <script>
         var tabledata = []; // Array to store the tabel data
 
-        function formValidaton() {
+        function formValidation() {
             // declared all variable and get value 
             let firstName = document.forms['myform']['fname'].value;
             let lastName = document.forms['myform']['lname'].value;
@@ -81,44 +85,144 @@
 
             // Check error in the input usig try, catch and throw function
             try {
-                firstNameError.textContent = "";
-                lastNameError.textContent = "";
-                phoneError.textContent = "";
-                dobError.textContent = "";
-                emailError.textContent = "";
-                genderError.textContent = "";
+                firstNameError.textContent = '';
+                lastNameError.textContent = '';
+                phoneError.textContent = '';
+                dobError.textContent = '';
+                emailError.textContent = '';
+                genderError.textContent = '';
 
-                if (firstName === "") throw `First Name can't be empty!`;
+                // First name validation
+                if (!isNaN(firstName)) throw ` ** First Name can't be any number!`;
+                if (firstName.length < 3) throw ` ** First Name must be at least 3 charactor!`;
+                if (firstName.length > 10) throw ` ** First Name must be less than 10 character!`;
 
-                if (lastName === "") throw `Last Name can't be empty!`;
+                // Last name validation
+                if (!isNaN(lastName)) throw ` ** Last Name can't be any number!`;
+                if (lastName.length < 3) throw ` ** Last Name must be at least 3 charactor!`;
+                if (lastName.length > 20) throw ` ** Last Name must be less than 20 character!`;
 
-                if (phone === "") throw `Phone Number can't be empty!`;
+                // Phone number validation
+                if (isNaN(phone)) throw ` ** Enter only number!`;
+                if (phone.length !== 10) throw ` ** Phone number must be 10 digit!`;
+                if (![9, 8, 7, 6].includes(Number(phone.charAt(0))))
+                    throw ` ** Mobile number should start with 9, 8, 7, or 6!`;
+                // if (phone.charAt(0) != 9 && phone.charAt(0) != 8 && phone.charAt(0) != 7 && phone.charAt(0) != 6)
+                //     throw ` ** Mobile number should be start with 9, 8, 7 or 6!`;
 
-                if (dob === "") throw `Date of Birth can't be empty!`;
+                // Email validation
+                if (email.indexOf(`@`) <= 0) throw ` ** Invalid Email!`;
+                if (email.charAt(email.length - 4) != `.` && (email.charAt(email.length - 3) != `.`))
+                    throw ` ** Please enter valid email address like "abcd@gmail.com"!`;
 
-                if (email === "") throw `Email can't be empty!`;
+                // Create an object for the input values
+                var dataObj = {
+                    name: firstName.concat(" ", lastName),
+                    phone: phone,
+                    dob: dob,
+                    email: email,
+                    gender: gender.value
+                };
 
-                if (gender === "") throw `select any gender!`;
+                // Push the object into the tabledata array
+                tabledata.push(dataObj);
+
+                // Clear the form inputs
+                document.forms['myform'].reset();
+
+                // Clear the table
+                clearTable();
+
+                // Re-render the table
+                renderTable(tabledata);
+
             } catch (err) {
                 switch (err) {
-                    case `First Name can't be empty!`:
+                    // Check case for First name
+                    case ` ** First Name can't be any number!`:
                         firstNameError.textContent = err;
                         break;
-                    case `Last Name can't be empty!`:
-                    lastNameError.textContent = err;
-                        break;
-                    case `First Name can't be empty!`:
+                    case ` ** First Name must be at least 3 charactor!`:
                         firstNameError.textContent = err;
                         break;
-                    case `First Name can't be empty!`:
+                    case ` ** First Name must be less than 10 character!`:
                         firstNameError.textContent = err;
                         break;
-                    case `First Name can't be empty!`:
-                        firstNameError.textContent = err;
+                        // Check case for last nmame
+                    case ` ** Last Name can't be any number!`:
+                        lastNameError.textContent = err;
                         break;
-
+                    case ` ** Last Name must be at least 3 charactor!`:
+                        lastNameError.textContent = err;
+                        break;
+                    case ` ** Last Name must be less than 20 character!`:
+                        lastNameError.textContent = err;
+                        break;
+                        //Check case for phone number
+                    case ` ** Enter only number!`:
+                        phoneError.textContent = err;
+                        break;
+                    case ` ** Phone number must be 10 digit!`:
+                        phoneError.textContent = err;
+                        break;
+                    case ` ** Mobile number should start with 9, 8, 7, or 6!`:
+                        phoneError.textContent = err;
+                        break;
+                        // Check case for Email
+                    case ` ** Invalid Email!`:
+                        emailError.textContent = err;
+                        break;
+                    case ` ** Please enter valid email address like "abcd@gmail.com"!`:
+                        emailError.textContent = err;
+                        break;
+                    default:
+                        console.log(err);
                 }
             }
+            return false; // Prevent form submission
+        }
+
+        // Tables values clear after submited form and enter the new value in the table befor the table value clear
+        function clearTable() {
+            var dataTable = document.getElementById("dataTable");
+            while (dataTable.rows.length > 1) {
+                dataTable.deleteRow(1);
+            }
+
+            var maleNamesTable = document.getElementById("maleNamesTable");
+            while (maleNamesTable.rows.length > 1) {
+                maleNamesTable.deleteRow(1);
+            }
+        }
+
+        function renderTable(data) {
+            var dataTable = document.getElementById("dataTable");
+            var maleNamesTable = document.getElementById("maleNamesTable");
+
+            data.map(function (item) {
+                var row = dataTable.insertRow(-1);
+
+                var nameCell = row.insertCell(0);
+                nameCell.innerHTML = item.name;
+
+                var phoneCell = row.insertCell(1);
+                phoneCell.innerHTML = item.phone;
+
+                var dobCell = row.insertCell(2);
+                dobCell.innerHTML = item.dob;
+
+                var emailCell = row.insertCell(3);
+                emailCell.innerHTML = item.email;
+
+                var genderCell = row.insertCell(4);
+                genderCell.innerHTML = item.gender;
+
+                if (item.gender === `male`) {
+                    var maleRow = maleNamesTable.insertRow(-1);
+                    var maleNameCell = maleRow.insertCell(0);
+                    maleNameCell.innerHTML = item.name;
+                }
+            });
         }
     </script>
 
