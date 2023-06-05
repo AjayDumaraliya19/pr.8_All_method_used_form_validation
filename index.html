@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>form validation</title>
-    <link rel="stylesheet" href="./css/fonts.css" />
     <link rel="stylesheet" href="./css/style.css" />
 </head>
 
@@ -15,43 +14,44 @@
     <div class="container">
         <div class="row">
             <div class="form-data">
-                <h1>LOGIN FORM</h1>
+                <h1>REGISTRATION FORM</h1>
                 <form name="myform" action="formData.html" onsubmit="return formValidation()" method="post">
-                    <div class="formdesign" id="firstname">
-                        <label for="fname" "fnam">First Name : </label><input type="text" name="fname" id="fnam"
-                            placeholder="Enter your first name"><span class="formerror" id="firstNameError"></span>
-                    </div>
-                    <div class="formdesign" id="lastname">
-                        <label for="lname">Last Name : </label><input type="text" name="lname" id="lnam"
-                            placeholder="Enter your last name"><span class="formerror" id="lastNameError"></span>
+                    <div class="fullname">
+                        <div class="formdesign" id="firstname">
+                            <label for="fname" "fnam">First Name : </label><input type="text" class="inputArea"
+                                name="fname" id="fnam" placeholder="Enter your first name"><span class="formerror"
+                                id="firstNameError"></span>
+                        </div>
+                        <div class="formdesign" id="lastname">
+                            <label for="lname">Last Name : </label><input type="text" class="inputArea" name="lname"
+                                id="lnam" placeholder="Enter your last name"><span class="formerror"
+                                id="lastNameError"></span>
+                        </div>
                     </div>
                     <div class="formdesign" id="phone">
-                        <label for="fphone">Mobile : </label><input type="tel" name="fphone" id="mobile"
-                            placeholder="Enter your mobile number" maxlength="10"><span class="formerror"
+                        <label for="fphone">Mobile : </label><input type="tel" class="inputArea" name="fphone"
+                            id="mobile" placeholder="Enter your mobile number" maxlength="10"><span class="formerror"
                             id="phoneError"></span>
                     </div>
                     <div class="formdesign" id="dob">
-                        <label for="dob">date of Birth : </label><input type="date" name="dob" id="dobField"><span
-                            class="formerror" id="dobError"></span>
+                        <label for="dob">date of Birth : </label><input type="date" class="inputArea" name="dob"
+                            id="dobField"><span class="formerror" id="dobError"></span>
                     </div>
                     <div class="formdesign" id="email">
-                        <label for="femail">Email : </label><input type="email" name="femail" id="mail"
-                            placeholder="Enter your Email"><span class="formerror" id="emailError"></span>
+                        <label for="femail">Email : </label><input type="email" class="inputArea" name="femail"
+                            id="mail" placeholder="Enter your Email"><span class="formerror" id="emailError"></span>
                     </div>
-                    <div class="formdesign" id="gender">
+                    <div class="formdesign" id="gender" class="genderList">
                         <label for="gender">Gender : </label>
-                        <input type="radio" name="gender" class="fgend" value="male">Male <span
-                            class="formerror"></span>
-                        <input type="radio" name="gender" class="fgend" value="female">Female <span
-                            class="formerror"></span>
-                        <span class="formerror"></span>
-                        <input type="radio" name="gender" class="fgend" value="other">Other <span
-                            class="formerror"></span>
-                        <span class="formerror" id="genderError"></span>
+                        <label><input type="radio" name="gender" class="inputArea" value="male">Male</label>
+                        <label><input type="radio" name="gender" class="inputArea" value="female">Female</label>
+                        <label><input type="radio" name="gender" class="inputArea" value="other">Other</lebel>
+                            <span class="formerror"></span>
+                            <span class="formerror" id="genderError"></span>
                     </div>
                     <div class="formdesign" id="address">
-                        <label for="faddress">Address : </label><textarea name="faddress" id="add" cols="40" rows="5"
-                            placeholder="Enter your address"></textarea><span class="formerror"
+                        <label for="faddress">Address : </label><textarea class="addArea" name="faddress" id="add"
+                            cols="0" rows="3" placeholder="Enter your address"></textarea><span class="formerror"
                             id="addressError"></span>
                     </div>
 
@@ -63,6 +63,7 @@
 
         <!-- input all data submited into table form -->
         <div class="row">
+            <h3>User Datas class="inputArea"</h3>
             <table id="dataTable" border="1">
                 <tr>
                     <th>Name</th>
