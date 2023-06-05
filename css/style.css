@@ -57,3 +57,56 @@
     width: 10%;
     height: 1em;
 }
+
+#gender {
+    display: inline;
+}
+
+#genderError {
+    font-size: 16px;
+}
+
+#address textarea {
+    font-size: 20px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.btn-Justy {
+    justify-content: space-between;
+    display: flex;
+}
+
+.button {
+    margin-top: 30px;
+    padding: 10px;
+    font-size: 30px;
+    font-weight: 700;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 49%;
+}
+
+.userData h2,
+.maleData h2 {
+    text-align: center;
+    text-decoration: underline;
+    margin: 20px 0;
+}
+.userData{
+    margin-bottom: 70px;
+}
+
+#dataTable,
+#maleNamesTable {
+
+    width: 100%;
+    font-size: 32px;
+}
+
+.sidebar{
+    position: sticky;
+    top: 50px;
+}

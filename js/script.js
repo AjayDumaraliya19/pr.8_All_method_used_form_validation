@@ -34,14 +34,14 @@ function formValidation() {
         if (!isNaN(firstName)) throw ` ** First Name can't be any number!`;
         if (firstName.length < 3) throw ` ** First Name must be at least 3 charactor!`;
         if (firstName.length > 10) throw ` ** First Name must be less than 10 character!`;
-        if (!/^[A-Za-z]+$/.test(firstName)) throw ` ** Please enter valid name, not use number!`;
+        if (!/^[A-Za-z]+$/.test(firstName)) throw ` ** Please enter valid first name, not use number!`;
 
         // Last name validation
         if (lastName === '') throw ` ** Last name can't be empty!`;
         if (!isNaN(lastName)) throw ` ** Last Name can't be any number!`;
         if (lastName.length < 3) throw ` ** Last Name must be at least 3 charactor!`;
         if (lastName.length > 20) throw ` ** Last Name must be less than 20 character!`;
-        if (!/^[A-Za-z]+$/.test(lastName)) throw ` ** Please enter valid name, not use number!`;
+        if (!/^[A-Za-z]+$/.test(lastName)) throw ` ** Please enter valid last name, not use number!`;
 
         // Phone number validation
         if (phone === '') throw ` ** Phone number can't be empty!`;
@@ -58,7 +58,7 @@ function formValidation() {
         if ((email.charAt(email.length - 4) != `.`) && (email.charAt(email.length - 3) != `.`)) throw ` ** Please enter valid email address like "abcd@gmail.com"!`;
 
         // Gender validation
-        if (gender === '') throw ` ** Please select valid gender!`;
+        if (!gender || gender.value === '') throw ` ** Please select valid gender!`;
 
         // Address validation
         if (address === '') throw ` ** Address can't be empty!`;
@@ -97,7 +97,7 @@ function formValidation() {
             case ` ** First Name must be less than 10 character!`:
                 firstNameError.textContent = err;
                 break;
-            case ` ** Please enter valid name, not use number!`:
+            case ` ** Please enter valid first name, not use number!`:
                 firstNameError.textContent = err;
                 break;
                 // Check case for last name
@@ -111,6 +111,9 @@ function formValidation() {
                 lastNameError.textContent = err;
                 break;
             case ` ** Last Name must be less than 20 character!`:
+                lastNameError.textContent = err;
+                break;
+            case ` ** Please enter valid last name, not use number!`:
                 lastNameError.textContent = err;
                 break;
                 //Check case for phone number
